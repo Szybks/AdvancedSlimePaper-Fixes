@@ -3,6 +3,10 @@
 Fork of [InfernalSuite/AdvancedSlimePaper](https://github.com/InfernalSuite/AdvancedSlimePaper) on the
 `dev/26.3` line, carrying a fix for [PaperMC/Paper#13707](https://github.com/PaperMC/Paper/issues/13707).
 
+> This repository hosts two branches:
+> * `26.3` — AdvancedSlimePaper `26.3.build.191-stable` (this branch)
+> * `26.2` — AdvancedSlimePaper `26.2.build.135-stable`
+
 | | |
 |---|---|
 | Minecraft | **26.3** |
