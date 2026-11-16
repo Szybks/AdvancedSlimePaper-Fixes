@@ -17,3 +17,5 @@ paper-api-generator/
 aspaper-server/.gradle/
 
 .checkstyle
+# local build output
+/builds/
