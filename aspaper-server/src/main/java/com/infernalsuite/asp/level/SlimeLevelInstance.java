@@ -117,7 +117,7 @@ public class SlimeLevelInstance extends ServerLevel {
 
         final PaperWorldLoader.LoadedWorldData data = new PaperWorldLoader.LoadedWorldData(
                 slimeBootstrap.initial().getName(),
-                UUID.randomUUID(),
+                slimeBootstrap.generateId(),
                 pdc,
                 PaperLevelOverrides.createFromLiveLevelData(primaryLevelData)
         );
