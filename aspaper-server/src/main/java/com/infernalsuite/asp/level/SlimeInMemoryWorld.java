@@ -9,7 +9,6 @@ import com.infernalsuite.asp.api.exceptions.WorldAlreadyExistsException;
 import com.infernalsuite.asp.api.loaders.SlimeLoader;
 import com.infernalsuite.asp.api.world.properties.SlimeProperties;
 import com.infernalsuite.asp.level.chunk.*;
-import com.infernalsuite.asp.pdc.AdventurePersistentDataContainer;
 import com.infernalsuite.asp.serialization.slime.SlimeSerializer;
 import com.infernalsuite.asp.skeleton.SkeletonCloning;
 import com.infernalsuite.asp.skeleton.SkeletonSlimeWorld;
@@ -51,7 +50,6 @@ public class SlimeInMemoryWorld implements SlimeWorld, SlimeWorldInstance {
     private final SlimeLevelInstance instance;
 
     private final ConcurrentMap<String, BinaryTag> extra;
-    private final AdventurePersistentDataContainer extraPDC;
     private final SlimePropertyMap propertyMap;
     private final SlimeLoader loader;
 
@@ -70,8 +68,6 @@ public class SlimeInMemoryWorld implements SlimeWorld, SlimeWorldInstance {
 
             this.chunkStorage.put(pos, initial);
         }
-
-        this.extraPDC = new AdventurePersistentDataContainer(this.extra);
     }
 
     @Override
@@ -293,7 +289,9 @@ public class SlimeInMemoryWorld implements SlimeWorld, SlimeWorldInstance {
 
     @Override
     public @NotNull PersistentDataContainer getPersistentDataContainer() {
-        return this.extraPDC;
+        // The Bukkit world PDC is the authoritative container; it is the one
+        // serialized into the "BukkitValues" extra tag on save.
+        return this.instance.persistentDataContainer;
     }
 
     public void promoteInChunkStorage(SlimeChunkLevel chunk) {
