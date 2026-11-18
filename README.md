@@ -45,6 +45,17 @@ return (event.useItemInHand() != Event.Result.ALLOW) ? InteractionResult.SUCCESS
 The whole change is a single patch:
 [`aspaper-server/minecraft-patches/sources/net/minecraft/server/level/ServerPlayerGameMode.java.patch`](aspaper-server/minecraft-patches/sources/net/minecraft/server/level/ServerPlayerGameMode.java.patch)
 
+## Additional fixes
+
+* **Slime world PDC is persisted** ([#177](https://github.com/InfernalSuite/AdvancedSlimePaper/issues/177)).
+  `SlimeWorldInstance#getPersistentDataContainer()` used to return a detached container, so values set
+  through it were never written to storage. It now returns the live Bukkit world PDC, which is serialized
+  as the `BukkitValues` extra tag on save.
+* **Stable world UUIDs** ([#164](https://github.com/InfernalSuite/AdvancedSlimePaper/issues/164)).
+  Slime worlds now get a deterministic UUID derived from their name
+  (`UUID.nameUUIDFromBytes("SlimeWorld" + name)`) instead of a new random UUID on every load, so
+  `World#getUID()` survives restarts. This matches upstream's `dev/consistent-uuids` approach.
+
 ## Building
 
 Requirements: **JDK 25** (Minecraft 26.x toolchain) and Git.
